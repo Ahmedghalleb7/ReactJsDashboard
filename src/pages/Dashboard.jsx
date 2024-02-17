@@ -3,10 +3,13 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import {useSelector} from 'react-redux';
 
 function Dashboard() {
+  const productStore =useSelector((state) =>state.product)
   const [data,setData]= useState([])
 
+  console.log(productStore,"product store")
 
   useEffect(()=>{
 
@@ -25,7 +28,7 @@ function Dashboard() {
   return (
     <div style={{ paddingTop : 80 ,paddingLeft:300 }} className='d-flex flex-wrap gap-3 justify-content-center mb-5 pb-5'>
       {data.map((e,i)=>
-      <Card style={{ width: '18rem' }} >
+      <Card style={{ width: '18rem' }} key={i} >
       <Card.Img variant="top" src={e.imageURL} style={{objectfit:"contain"}} width={100} height={200}/>
       <Card.Body className='d-flex flex-column justify-content-between'  >
         <Card.Title>{e.productName}</Card.Title>

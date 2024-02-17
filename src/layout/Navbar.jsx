@@ -18,7 +18,7 @@ import { red } from "@mui/material/colors";
 
 
 function Navbar({ setToggle, toggle }) {
-
+const productStore =useSelector
 
   return (
     <div
@@ -42,7 +42,6 @@ function Navbar({ setToggle, toggle }) {
     </div>
   
   );
-  
 
 }
 
