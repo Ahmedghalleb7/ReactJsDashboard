@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import {
   MDBContainer,
   MDBNavbar,
@@ -15,28 +15,38 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from "@mui/material/colors";
+import { useSelector,useDispatch } from "react-redux";
+import { filterProduct } from "../store/product";
+
 
 
 function Navbar({ setToggle, toggle }) {
-const productStore =useSelector
-
+const productStore =useSelector ((store) => store.product)
+const dispatch = useDispatch();
+const handleSearch = useCallback(event=>{
+  console.log(event);
+  dispatch (filterProduct(event.target.value))
+})
   return (
     <div
-      className={`position-fixed bg-dark ${
+      className={`position-fixed  ${
         toggle === true ? "justify-content-between" : "justify-content-end"
       }  d-flex`}
-      style={{ width: "100%", height: 70 , zIndex:2 }}
+      style={{ backgroundColor:"#333", width: "100%", height: 70 , zIndex:2 }}
+      
     >
       {toggle === true && (
         <button className="btn btn-light" onClick={() => setToggle(false)}>{"->"}</button>
       )}
-      <Search className="p-2 m-2 d-flex aligne-items-center">
+      <Search className="p-2 m-2 d-flex aligne-items-center"
+      onChange={(e) => dispatch(filterProduct(e.target.value))}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
+              
             />
           </Search>
     </div>
