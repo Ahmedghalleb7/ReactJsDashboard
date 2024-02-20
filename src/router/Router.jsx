@@ -19,7 +19,7 @@ function Router() {
             <Route path="orders" element={<Orders />}>
               <Route index element={<OrderList />} />
               <Route path="add" element={<AddOrder />} />
-              <Route path="one/:orderId" element={<OrderDetails />} />
+              <Route path="one/:id" element={<OrderDetails />} /> // passing the orderId in the params 
             </Route>
           </Route>
         ) : (

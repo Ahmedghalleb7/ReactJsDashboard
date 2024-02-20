@@ -2,14 +2,14 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 
-export const filterProduct = createAsyncThunk("filterProducts", async(str) => {
-    try {
-        const res = await axios.get("http://localhost:3000/data.json");
-        console.log(res.data);
-        return res.data.filter((elem,i)=>elem.productName.toUpperCase().includes(str.toUpperCase()))
-      } catch (error) {
-        console.log(error);
-      }
+export const filterProduct = createAsyncThunk("filterProducts", async (str) => {
+  try {
+    const res = await axios.get("http://localhost:3000/data.json");
+    console.log(res.data);
+    return res.data.filter((elem, i) => elem.productName.toUpperCase().includes(str.toUpperCase()))
+  } catch (error) {
+    console.log(error);
+  }
 
 
 });
@@ -25,8 +25,7 @@ export const getProducts = createAsyncThunk("getProducts", async () => {
 export const getProduct = createAsyncThunk("getProduct", async (orderId) => {
   try {
     const res = await axios.get("http://localhost:3000/data.json");
-    console.log(res.data.find((elem,i) =>elem.id===+orderId ),"hereeee");
-    return res.data.find((elem,i) =>elem.id===+orderId )
+    return res.data.find((elem, i) => elem.id === +orderId) // converting the orderId to number
   } catch (error) {
     console.log(error);
   }
@@ -46,8 +45,8 @@ export const productSlice = createSlice({
     builder.addCase(filterProduct.fulfilled, (state, action) => {
       state.products = action.payload;
     });
-    builder.addCase(getProduct.fulfilled,(state,action)=>{
-      state.product=action.payload
+    builder.addCase(getProduct.fulfilled, (state, action) => {
+      state.product = action.payload
     })
   },
 });

@@ -9,9 +9,9 @@ function OrderDetails() {
  const product = useSelector((state) =>state.product.product)
  console.log(product);
  const dispatch=useDispatch()
-  const { orderId } = useParams();
+  const { id } = useParams();
   useEffect(() => {
-    dispatch(getProduct(orderId)) // converting the orderId to number
+    dispatch(getProduct(id)) 
   }, []);
 
   return <div>
